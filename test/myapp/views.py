@@ -20,6 +20,9 @@ def HTMLTemplate(articleTag):
                 {ol}
             </ul>
             {articleTag}
+            <ul>
+                <li><a href = "/create">create</a></li>
+            </ul>
         </body>
         </html>
         '''
@@ -30,9 +33,6 @@ def index(request):
     Hello,dJANGO
     '''
     return HttpResponse(HTMLTemplate(article))
-        
-def create(request):
-    return HttpResponse('Create')
 
 def read(request, id):
     global topics
@@ -42,3 +42,15 @@ def read(request, id):
         if topic['id'] == int(id):
             article = f'<h2>{topic["title"]}</h2>{topic["body"]}'
     return HttpResponse(HTMLTemplate(article))
+
+        
+def create(request):
+    article = '''
+        <form action="/create/">
+            <p><input type="text" name="title" placeholder="title"></p>
+            <p><textarea name="body" placeholder="body"></textarea></p>
+            <p><input type="submit"></p>
+        </form>
+    '''
+    return HttpResponse(HTMLTemplate(article))
+
